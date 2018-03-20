@@ -28,6 +28,20 @@
     </nav>
 
     <div class="container-fluid">
+      <% if notice.present? %>
+        <p class="alert alert-info"><%= notice %></p>
+      <% end %>
+
+      <% if alert.present? %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+      <% if flash[:error].present? %>
+        <div class="col-10 offset-1 alert alert-danger text-center">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+      
       <%= yield %>
     </div>
   </body>
