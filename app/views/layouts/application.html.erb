@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Flixter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><h1>Flixter</h1></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between" id="mainNavContent">
+        <div class="navbar-nav justify-content-start">
+          <a class="nav-item nav-link" href="#">See All Courses</a>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="navbar-nav justify-content-end">
+          <a class="nav-item nav-link" href="#">Log in</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
