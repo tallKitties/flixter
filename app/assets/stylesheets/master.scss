@@ -1,5 +1,16 @@
 @import "bootstrap";
 
+body {
+  background: image_url('body_bg.png');
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+
+.feature {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 .frosty {
   background: rgba(0, 0, 0, 0.5);
   color: #f8f9fa;
