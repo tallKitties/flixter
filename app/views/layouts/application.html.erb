@@ -22,7 +22,13 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="navbar-nav justify-content-end">
-          <a class="nav-item nav-link" href="#">Log in</a>
+          <% if user_signed_in? %>
+            <%= link_to 'My Profile', '#', class: 'nav-link nav-item' %>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link nav-item' %>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, class: 'nav-link nav-item' %>
+            <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link nav-item' %>
+          <% end %>
         </div>
       </div>
     </nav>
