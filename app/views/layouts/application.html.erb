@@ -10,45 +10,53 @@
   </head>
 
   <body>
-    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><h1>Flixter</h1></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div id="flex-content-container">
+      <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+        <%= link_to "<h1>Flixter</h1>".html_safe, root_path, class: 'navbar-brand' %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-between" id="mainNavContent">
+          <div class="navbar-nav justify-content-start">
+            <a class="nav-item nav-link" href="#">See All Courses</a>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="navbar-nav justify-content-end">
+            <% if user_signed_in? %>
+              <%= link_to 'My Profile', '#', class: 'nav-link nav-item' %>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link nav-item' %>
+            <% else %>
+              <%= link_to 'Sign in', new_user_session_path, class: 'nav-link nav-item' %>
+              <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link nav-item' %>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <% if notice.present? %>
+          <p class="alert alert-info"><%= notice %></p>
+        <% end %>
 
-      <div class="collapse navbar-collapse justify-content-between" id="mainNavContent">
-        <div class="navbar-nav justify-content-start">
-          <a class="nav-item nav-link" href="#">See All Courses</a>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="navbar-nav justify-content-end">
-          <% if user_signed_in? %>
-            <%= link_to 'My Profile', '#', class: 'nav-link nav-item' %>
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link nav-item' %>
-          <% else %>
-            <%= link_to 'Sign in', new_user_session_path, class: 'nav-link nav-item' %>
-            <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link nav-item' %>
-          <% end %>
-        </div>
+        <% if alert.present? %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+
+        <% if flash[:error].present? %>
+          <div class="col-10 offset-1 alert alert-danger text-center">
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+        
+        <%= yield %>
       </div>
-    </nav>
-
-    <div class="container-fluid">
-      <% if notice.present? %>
-        <p class="alert alert-info"><%= notice %></p>
-      <% end %>
-
-      <% if alert.present? %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
-
-      <% if flash[:error].present? %>
-        <div class="col-10 offset-1 alert alert-danger text-center">
-          <%= flash[:error] %>
-        </div>
-      <% end %>
-      
-      <%= yield %>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <b>Teachers</b>
+        <br />
+        <%= link_to 'Teach a Course', new_instructor_course_path %>
+      </div>
     </div>
   </body>
 </html>
