@@ -25,6 +25,14 @@ body {
   color: #f8f9fa;
 }
 
+.help-block {
+  color: #ff3333;
+  background-color: #FFEEEE;
+  border-radius: 3px;
+  padding: 2px 8px 2px 8px;
+  margin: 10px;
+}
+
 .hero {
   background: image_url('hero.jpg') no-repeat center 80% fixed;
   -webkit-background-size: cover;
