@@ -5,9 +5,4 @@ class CoursesController < ApplicationController
 
   def show
   end
-
-  private
-
-  # helper_method :current_course
-    
 end

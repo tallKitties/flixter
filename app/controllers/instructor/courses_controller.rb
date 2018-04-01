@@ -21,13 +21,8 @@ class Instructor::CoursesController < ApplicationController
 
   private
 
-  # helper_method :current_course
-  # def current_course
-  #   @current_course ||= Course.find(params[:id])
-  # end
-
   def course_params
-    params.require(:course).permit(:title, :description, :cost)
+    params.require(:course).permit(:title, :description, :cost, :image)
   end
 
   def require_authorized_for_current_course
