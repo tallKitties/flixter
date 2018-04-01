@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_course, :current_lesson
 
   def current_course
-    id = params[:id].nil? ? params[:course_id] : params[:id]
+    id = params.key?(:course_id) ? params[:course_id] : params[:id]
     @current_course ||= Course.find(id)
   end
 
