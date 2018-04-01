@@ -36,8 +36,9 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'simple_form'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
-gem "figaro"
-gem "fog-aws"
+gem 'figaro'
+gem 'fog-aws'
+gem 'mini_magick'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
