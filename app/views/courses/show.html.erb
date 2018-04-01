@@ -7,7 +7,7 @@
     </div>
   <% end %>
   
-  <div class="row">
+  <div class="row course-info">
     <div class="col-sm-4 col-12 text-center">
       <span class="badge badge-default">
         <%= number_to_currency current_course.cost %>
@@ -23,23 +23,25 @@
     <div class="col-sm-8 col-12">
       <%= current_course.description %>
     </div>
+  </div>
 
+  <div class="row">
     <div class="col-12">
       <% current_course.sections.each do |section| %>
-        <div class="section">
-          <%= section.title %>
+        <div class="section row">
+          <h3 class= "col-12"><%= section.title %></h3>
           <% section.lessons.each do |lesson| %>
-            <div class="lesson">
+            <div class="lesson col-12 col-sm-6 d-flex align-items-center justify-content-center text-center">
               <%= link_to lesson_path(lesson) do %>
                 <b><%= lesson.title %></b>
-                -
+                <br>
                 <%= lesson.subtitle %>
               <% end %>
             </div>
           <% end %>
+          <span class="clearfix"></span>
         </div>
       <% end %>
     </div>
   </div>
-  <br>
 </div>
