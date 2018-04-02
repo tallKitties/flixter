@@ -1,8 +1,10 @@
 @import "bootstrap";
 
+$font-weight-100: 100;
+
 body {
   background: image_url('body_bg.png');
-  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  font-family: "Helvetica Neue", Helvetica, serif;
 }
 
 .booyah-box {
@@ -65,30 +67,26 @@ body {
 
   a {
     color: white;
-    font-family: "Helvetica Neue", Helvetica;
-    font-weight: 100;
     font-size: 15px;
 
     b {
-      font-weight: 100;
       font-size: 25px;
     }
   }
 }
 
 .navbar {
-  font-family: "Helvetica Neue", Helvetica;
   font-weight: 200;
   box-shadow: 0px 1px 3px #2a2a2a;
   background: image_url('curls.png');
 }
 
-a.navbar-brand > h1, .frosty h1, .frosty h2 {
-  font-family: "Helvetica Neue", Helvetica;
-}
-
-a.navbar-brand > h1, .frosty h1 {
-  font-weight: 100;
+a.navbar-brand > h1,
+.frosty h1,
+.skinny-title,
+.lesson > a,
+.lesson > a > b{
+  font-weight: $font-weight-100;
 }
 
 .section {

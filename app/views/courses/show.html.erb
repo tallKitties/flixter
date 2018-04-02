@@ -10,7 +10,11 @@
   <div class="row course-info">
     <div class="col-sm-4 col-12 text-center">
       <span class="badge badge-default">
-        <%= number_to_currency current_course.cost %>
+        <% if current_course.free? %>
+          Free Course!
+        <% else %>
+          <%= number_to_currency current_course.cost %>
+        <% end %>
       </span>
 
       <% if current_user %>
@@ -24,10 +28,23 @@
         <% if current_user.enrolled_in?(current_course) %>
           <h2 class="badge badge-info">You Are Enrolled!</h2>
         <% else %>
-          <%= link_to 'Enroll', course_enrollments_path(current_course), class: 'btn btn-primary', method: :post %>        
+          <% if current_course.premium? %>
+            <%= form_tag course_enrollments_path(current_course) do %>
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-email="<%= current_user.email %>"
+                      data-description="<%= current_course.title %>: <%= number_to_currency current_course.cost %>"
+                      data-amount="<%= current_course.cost_in_cents %>"
+                      data-locale="auto"></script>
+            <% end %>
+          <% else %>
+            <%= link_to 'Enroll', course_enrollments_path(current_course), class: 'btn btn-primary', method: :post %>
+          <% end %>
         <% end %>
+      <% else %>
+        <%= link_to 'Sign In to Enroll!', new_user_session_path, class: 'btn btn-success' %>
       <% end %>
-
+      <span class="clearfix"></span>
     </div>
 
     <div class="col-sm-8 col-12">

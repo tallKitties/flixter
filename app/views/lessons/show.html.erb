@@ -1,6 +1,11 @@
 <div class="booyah-box col-10 offset-1">
-  <h1><%= current_lesson.title %></h1>
-  <p>
+  <div class="col-12 text-center">
+    <h1><%= current_lesson.section.course.title %></h1>
+    <h1 class="skinny-title"><%= current_lesson.section.title %></h2>
+  </div>
+  <hr>
+  <h2><%= current_lesson.title %></h2>
+  <p class="pl-3">
     <%= current_lesson.subtitle %>
   </p>
 
