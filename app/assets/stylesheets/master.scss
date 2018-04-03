@@ -61,9 +61,15 @@ body {
 }
 
 .lesson {
-  background-color: #111;
   margin-top: 10px;
   height: 130px;
+  padding-right: 5px;
+  padding-left: 5px;
+
+  .lesson-details{
+    background-color: #111;
+    height: 100%;
+  }
 
   a {
     color: white;
