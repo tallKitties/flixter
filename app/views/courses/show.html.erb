@@ -5,7 +5,7 @@
       <%= image_tag current_course.image, class: 'img-fluid course-image rounded' %>
     </div>
   <% end %>
-  
+
   <div class="row course-info">
     <div class="col-sm-4 col-12 text-center">
       <span class="badge badge-default">
@@ -53,7 +53,7 @@
 
   <div class="row">
     <div class="col-12">
-      <% current_course.sections.each do |section| %>
+      <% current_course.sections.rank(:row_order).each do |section| %>
         <div class="section row">
           <h3 class= "col-12"><%= section.title %></h3>
           <% section.lessons.rank(:row_order).each do |lesson| %>
