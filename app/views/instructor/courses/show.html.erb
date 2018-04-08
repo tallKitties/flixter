@@ -22,6 +22,8 @@
     });
   });
 </script>
+
+<!-- content -->
 <div class="booyah-box col-10 offset-1">
   <h1 class="text-center"><%= current_course.title %></h1>
   <% if current_course.image.present? %>
@@ -29,27 +31,40 @@
       <%= image_tag current_course.image, class: 'img-fluid course-image rounded' %>
     </div>
   <% end %>
-  <div class="col-12 d-inline-flex justify-content-center">
-    <%= link_to 'Preview As Student...', course_path(current_course), class: 'btn btn-warning mr-2' %>
-    <%= link_to 'Add a new section...', new_instructor_course_section_path(current_course), class: 'btn btn-primary' %>
+  <div class="col-12 col-sm-6 offset-sm-6 d-sm-flex justify-content-sm-end flex-wrap">
+    <%= link_to 'Preview As Student...', course_path(current_course), class: 'btn btn-warning mb-2 col-12 col-sm-10' %>
+    <%= link_to 'Add a new section...', new_instructor_course_section_path(current_course), class: 'btn btn-primary col-12 col-sm-10' %>
   </div>
-
-  <ul class="sections">
+  <ul class="sections m-md-4">
     <% current_course.sections.rank(:row_order).each do |section| %>
       <li data-update-url=<%= instructor_section_path(section) %>>
-        <%= section.title %>
-        <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary btn-sm' %>
-        <ul class="lessons">
+
+        <div class="header">
+          <%= fa_icon "ellipsis-v" %>
+          <%= section.title %>
+          <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary btn-sm' %>
+          <span class="clearfix"></span>
+        </div>
+
+        <ul class="lessons d-sm-flex flex-sm-wrap justify-content-sm-end">
           <% section.lessons.rank(:row_order).each do |lesson| %>
-            <li data-update-url=<%= instructor_lesson_path(lesson) %>>
-              <b><%= lesson.title %></b>
-              -
-              <%= lesson.subtitle %>
+            <li data-update-url=<%= instructor_lesson_path(lesson) %> class="col-12 col-sm-11">
+              <div class="d-flex justify-content-between align-items-center">
+                <%= fa_icon "ellipsis-v" %>
+                <div>
+                  <p class="">
+                    <b><%= lesson.title %></b>
+                  </p>
+                  <p>
+                    <%= lesson.subtitle %>
+                  </p>
+                </div>
+                <span class="clearfix"></span>
+              </div>
             </li>
           <% end %>
         </ul>
         <span class="clearfix"></span>
-        <br>
       </li>
     <% end %>
   </ul>
