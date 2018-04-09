@@ -33,7 +33,9 @@
   <% end %>
   <div class="col-12 col-sm-6 offset-sm-6 d-sm-flex justify-content-sm-end flex-wrap">
     <%= link_to 'Preview As Student...', course_path(current_course), class: 'btn btn-warning mb-2 col-12 col-sm-10' %>
-    <%= link_to 'Add a new section...', new_instructor_course_section_path(current_course), class: 'btn btn-primary col-12 col-sm-10' %>
+    <button type="button" class="btn btn-primary col-12 col-sm-10" data-toggle="modal" data-target="#newSectionModal">
+      Add a new section...
+    </button>
   </div>
   <ul class="sections m-md-4">
     <% current_course.sections.rank(:row_order).each do |section| %>
@@ -68,4 +70,26 @@
       </li>
     <% end %>
   </ul>
+</div>
+
+<!-- Add Section Modal -->
+<div class="modal fade" id="newSectionModal" tabindex="-1" role="dialog" aria-labelledby="newSectionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="newSectionModalLabel"><i>Add a New Section</i></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @section, url: instructor_course_sections_path(current_course) do |f| %>
+        <div class="modal-body">
+          <%= f.input :title %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Add a section", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
