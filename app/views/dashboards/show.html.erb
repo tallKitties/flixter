@@ -1,0 +1,53 @@
+<div class="booyah-box col-10 offset-1">
+  <h1>What I'm Learning</h1>
+  <% current_user.enrolled_courses.each do |course| %>
+    <h3 class="text-center">
+      <%= link_to course.title, course_path(course) %>
+    </h3>
+    <br>
+    <% if course.image.present? %>
+      <div class="row">
+        <div class="col-12 text-center">
+          <%= image_tag course.image, class: 'img-fluid course-image rounded' %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row text-center">
+      <div class="col-sm-7 col-12">
+        <%= course.description %>
+      </div>
+      <div class="col-sm-4 col-12">
+        <%= link_to 'More Details...', course_path(course), class: 'btn btn-primary btn-large' %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <hr class="col-8 offset-2">
+  <% end %>
+
+  <h1>What I'm Teaching</h1>
+  <% current_user.courses.each do |course| %>
+    <h3 class="text-center">
+      <%= link_to course.title, course_path(course) %>
+    </h3>
+    <br>
+    <% if course.image.present? %>
+      <div class="row">
+        <div class="col-12 text-center">
+          <%= image_tag course.image, class: 'img-fluid course-image rounded' %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row text-center">
+      <div class="col-sm-7 col-12">
+        <%= course.description %>
+      </div>
+      <div class="col-sm-4 col-12">
+        <%= link_to 'More Details...', course_path(course), class: 'btn btn-primary btn-large' %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <hr class="col-8 offset-2">
+  <% end %>
+</div>
