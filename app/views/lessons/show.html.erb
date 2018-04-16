@@ -1,7 +1,9 @@
 <div class="booyah-box col-10 offset-1">
   <div class="col-12 text-center">
-    <h1><%= current_lesson.section.course.title %></h1>
-    <h1 class="skinny-title"><%= current_lesson.section.title %></h2>
+    <h1>
+      <%= link_to current_lesson.section.course.title, course_path(current_lesson.section.course) %>
+    </h1>
+    <h2 class="skinny-title"><%= current_lesson.section.title %></h2>
   </div>
   <hr>
   <h2><%= current_lesson.title %></h2>
@@ -9,13 +11,35 @@
     <%= current_lesson.subtitle %>
   </p>
 
-  <video id="my-video" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="<%= image_path('poster.png') %>" data-setup="{}">
-    <source src="<%= current_lesson.video.to_s %>" type="video/mp4">
-    <noscript>
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+  <% if current_lesson.next_lesson.present? %>
+    <%= link_to lesson_path(current_lesson.next_lesson), class: "btn btn-default float-right" do %>
+      Next Lesson &nbsp;
+      <span class="fa fa-forward"></span>
+    <% end %>
+  <% end %>
+  <% if current_lesson.previous_lesson.present? %>
+    <%= link_to lesson_path(current_lesson.previous_lesson), class: "btn btn-default float-left" do %>
+      <span class="fa fa-backward"></span>
+      &nbsp; Previous Lesson
+    <% end %>
+  <% end %>
+  <span class="clear-fix"></span>
+
+  <% if current_lesson.video.present? %>
+    <video id="my-video" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="<%= image_path('poster.png') %>" data-setup="{}">
+      <source src="<%= current_lesson.video.to_s %>" type="video/mp4">
+      <noscript>
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a web browser that
+          <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+      </noscript>
+    </video>
+  <% else %>
+    <div class="col-12 text-center my-5">
+      <p>
+        There is no video available for this lesson.
       </p>
-    </noscript>
-  </video>
+    </div>
+  <% end %>
 </div>

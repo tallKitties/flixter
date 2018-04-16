@@ -2,6 +2,10 @@
 
 $font-weight-100: 100;
 
+a:hover {
+  text-decoration: none;
+}
+
 body {
   background: image_url('body_bg.png');
   font-family: "Helvetica Neue", Helvetica, serif;
@@ -27,6 +31,10 @@ ul {
   border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
   margin-top: 30px;
   padding: 20px;
+
+  h1 a {
+    color: black;
+  }
 }
 
 .course-image {
@@ -145,4 +153,9 @@ a.navbar-brand > h1,
     padding: 15px;
     margin: 20px 7px;
   }
+}
+
+.link-no-deco {
+  color: #000000 !important;
+  text-decoration: none;
 }
