@@ -1,5 +1,10 @@
 <script>
   $(function() {
+    $('.new-lesson-button').click(function() {
+      var lessonUrl = ( $(event.target).data('lesson-url') );
+      $('#newLessonForm').attr('action', lessonUrl);
+    });
+
     $('.lessons').sortable({
       update: function( event, ui ) {
         $.ajax({
@@ -32,29 +37,36 @@
     </div>
   <% end %>
   <div class="col-12 col-sm-6 offset-sm-6 d-sm-flex justify-content-sm-end flex-wrap">
-    <%= link_to 'Preview As Student...', course_path(current_course), class: 'btn btn-warning mb-2 col-12 col-sm-10' %>
+    <%= link_to 'Preview As Student', course_path(current_course), class: 'btn btn-warning mb-2 col-12 col-sm-10' %>
     <button type="button" class="btn btn-primary col-12 col-sm-10" data-toggle="modal" data-target="#newSectionModal">
-      Add a new section...
+      Add a new section
     </button>
   </div>
   <ul class="sections m-md-4">
     <% current_course.sections.rank(:row_order).each do |section| %>
-      <li data-update-url=<%= instructor_section_path(section) %>>
+      <li data-update-url=<%= instructor_section_path(section)%>>
 
-        <div class="header">
+        <div class="header grab-cursor">
           <%= fa_icon "ellipsis-v" %>
           <%= section.title %>
-          <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary btn-sm' %>
+          <button
+            type="button"
+            class="float-right btn btn-primary btn-sm new-lesson-button"
+            data-toggle="modal"
+            data-target="#newLessonModal"
+            data-lesson-url="<%= instructor_section_lessons_path(section) %>">
+              Add a new lesson
+          </button>
           <span class="clearfix"></span>
         </div>
 
         <ul class="lessons d-sm-flex flex-sm-wrap justify-content-sm-end">
           <% section.lessons.rank(:row_order).each do |lesson| %>
-            <li data-update-url=<%= instructor_lesson_path(lesson) %> class="col-12 col-sm-11">
+            <li data-update-url=<%= instructor_lesson_path(lesson) %> class="col-12 col-sm-11 grab-cursor">
               <div class="d-flex justify-content-between align-items-center">
                 <%= fa_icon "ellipsis-v" %>
-                <div>
-                  <p class="">
+                <div class="text-center">
+                  <p>
                     <b><%= lesson.title %></b>
                   </p>
                   <p>
@@ -88,6 +100,31 @@
         </div>
         <div class="modal-footer">
           <%= f.submit "Add a section", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Lesson Modal -->
+<div class="modal fade" id="newLessonModal" tabindex="-1" role="dialog" aria-labelledby="newLessonModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="newLessonModalLabel"><i>Add a New Lesson</i></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @lesson, url: '#', html: { id: 'newLessonForm' } do |f| %>
+        <div class="modal-body">
+          <%= f.input :title %>
+          <%= f.input :subtitle %>
+          <%= f.input :video %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Add a lesson", class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
