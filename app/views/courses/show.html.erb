@@ -54,11 +54,11 @@
   <div class="row">
     <div class="col-12">
       <% current_course.sections.rank(:row_order).each do |section| %>
-        <div class="section row">
+        <div class="sections row">
           <h3 class= "col-12"><%= section.title %></h3>
           <% section.lessons.rank(:row_order).each do |lesson| %>
             <div class="lesson col-12 col-sm-6">
-              <div class="col-12 d-flex justify-content-center align-items-center text-center lesson-details">
+              <div class="d-flex justify-content-center align-items-center text-center lesson-details">
                 <%= link_to lesson_path(lesson) do %>
                   <b><%= lesson.title %></b>
                   <br>

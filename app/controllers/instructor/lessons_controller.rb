@@ -5,7 +5,7 @@ class Instructor::LessonsController < ApplicationController
 
   def create
     @lesson = current_section.lessons.create(lesson_params)
-    @lesson.send_lesson_email
+    # @lesson.send_lesson_email
     redirect_to instructor_course_path(current_section.course)
   end
 

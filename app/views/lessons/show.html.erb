@@ -11,22 +11,24 @@
     <%= current_lesson.subtitle %>
   </p>
 
-  <% if current_lesson.next_lesson.present? %>
-    <%= link_to lesson_path(current_lesson.next_lesson), class: "btn btn-default float-right" do %>
-      Next Lesson &nbsp;
-      <span class="fa fa-forward"></span>
+  <div class="col-12 buttons d-flex justify-content-between">
+    <% if current_lesson.previous_lesson.present? %>
+      <%= link_to lesson_path(current_lesson.previous_lesson), class: "btn btn-default" do %>
+        <span class="fa fa-backward"></span>
+        &nbsp; Previous Lesson
+      <% end %>
     <% end %>
-  <% end %>
-  <% if current_lesson.previous_lesson.present? %>
-    <%= link_to lesson_path(current_lesson.previous_lesson), class: "btn btn-default float-left" do %>
-      <span class="fa fa-backward"></span>
-      &nbsp; Previous Lesson
+
+    <% if current_lesson.next_lesson.present? %>
+      <%= link_to lesson_path(current_lesson.next_lesson), class: "btn btn-default" do %>
+        Next Lesson &nbsp;
+        <span class="fa fa-forward"></span>
+      <% end %>
     <% end %>
-  <% end %>
-  <span class="clear-fix"></span>
+  </div>
 
   <% if current_lesson.video.present? %>
-    <video id="my-video" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="<%= image_path('poster.png') %>" data-setup="{}">
+    <video id="my-video" class="col-12 my-1 video-js vjs-big-play-centered vjs-fluid" controls preload="auto" poster="<%= image_path('poster.png') %>" data-setup="{}">
       <source src="<%= current_lesson.video.to_s %>" type="video/mp4">
       <noscript>
         <p class="vjs-no-js">
