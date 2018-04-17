@@ -5,6 +5,7 @@ class Instructor::LessonsController < ApplicationController
 
   def create
     @lesson = current_section.lessons.create(lesson_params)
+    @lesson.send_lesson_email
     redirect_to instructor_course_path(current_section.course)
   end
 
@@ -14,8 +15,6 @@ class Instructor::LessonsController < ApplicationController
   end
 
   private
-
-  helper_method :current_section
 
   def lesson_params
     params.require(:lesson).permit(:title, :subtitle, :video, :row_order_position)
