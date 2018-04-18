@@ -11,20 +11,21 @@
     <%= current_lesson.subtitle %>
   </p>
 
-  <div class="col-12 buttons d-flex justify-content-between">
+  <div class="col-12">
     <% if current_lesson.previous_lesson.present? %>
-      <%= link_to lesson_path(current_lesson.previous_lesson), class: "btn btn-default" do %>
+      <%= link_to lesson_path(current_lesson.previous_lesson), class: "btn btn-default float-left" do %>
         <span class="fa fa-backward"></span>
         &nbsp; Previous Lesson
       <% end %>
     <% end %>
 
     <% if current_lesson.next_lesson.present? %>
-      <%= link_to lesson_path(current_lesson.next_lesson), class: "btn btn-default" do %>
+      <%= link_to lesson_path(current_lesson.next_lesson), class: "btn btn-default float-right" do %>
         Next Lesson &nbsp;
         <span class="fa fa-forward"></span>
       <% end %>
     <% end %>
+    <span class="clearfix"></span>
   </div>
 
   <% if current_lesson.video.present? %>
